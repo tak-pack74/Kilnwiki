@@ -13,7 +13,7 @@ const pages = [
   createData("Test5", "#####hoge"),
 ];
 
-const Header = () => {
+const pageList = () => {
   return (
     <div className>
       <List component="nav">
@@ -27,4 +27,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default pageList;
