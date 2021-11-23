@@ -1,30 +1,51 @@
 import React from "react";
 import { List, ListItem, ListItemText } from "@material-ui/core";
 
-const createData = (title, body ) => {
-  return { title, body };
-  }
-
-const pages = [
-  createData("Test1", "#hoge"),
-  createData("Test2", "##hoge"),
-  createData("Test3", "###hoge"),
-  createData("Test4", "####hoge"),
-  createData("Test5", "#####hoge"),
-];
-
-const pageList = () => {
-  return (
-    <div className>
-      <List component="nav">
-        {pages.map((page) => (
-          <ListItem button>
-          <ListItemText primary={page.title} secondary={page.body}/>
-          </ListItem>
-        ))}
-      </List>
-  </div>
-  );
+// 暫定データ（開発用）
+  
+const createData = (id, title, body ) => {
+  return { id, title, body };
 };
 
-export default pageList;
+const pages = [
+  createData(1, "Test1", "#hoge"),
+  createData(2, "Test2", "##hoge"),
+  createData(3, "Test3", "###hoge"),
+  createData(4, "Test4", "####hoge"),
+  createData(5, "Test5", "#####hoge"),
+];
+
+class PageList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {};
+  }
+
+  renderPageListItem () {
+    return (
+      <div>
+        {pages.map(
+          (page) => (
+            <ListItem button
+            onClick={() => this.props.handlePageClick(page.id)}
+            >
+            <ListItemText primary={page.title} secondary={page.body} />
+            </ListItem>
+          )
+        )}
+      </div>
+    );
+  };
+
+  render () {
+    return (
+      <div className>
+        <List component="nav">
+          {this.renderPageListItem()}
+        </List>
+      </div>
+    );
+  };
+}
+
+export default PageList;
