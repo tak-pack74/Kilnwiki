@@ -27,7 +27,7 @@ class PageList extends React.Component {
         {pages.map(
           (page) => (
             <ListItem button
-            onClick={() => this.props.handlePageClick(page.id)}
+            onClick={() => this.props.handlePageClick(page)}
             >
             <ListItemText primary={page.title} secondary={page.body} />
             </ListItem>

@@ -11,19 +11,24 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      chosenPageId: null,
+      chosenPage: {
+        id: null,
+        body: null,
+        title: null,
+      },
       isPageChosen: false,
     };
   }
-  
+
   // 子コンポーネントPageListで使用するハンドラー関数
   // 記事を選択したときにstateのchosenPageIdを更新する
-  handlePageClick = pageId => {
+  handlePageClick = page => {
     this.setState({
-      chosenPageId: pageId
+      chosenPage: page
     })
   }
 
+  // render一覧
   renderPageList() {
     return <PageList 
       handlePageClick={this.handlePageClick}
@@ -32,7 +37,7 @@ class App extends React.Component {
 
   renderPageViewField() {
     return <PageViewField
-      chosenPage={this.state.chosenPageId}
+      chosenPage={this.state.chosenPage}
       />
   }
 
