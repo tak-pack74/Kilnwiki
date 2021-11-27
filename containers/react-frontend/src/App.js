@@ -5,31 +5,34 @@ import PageList from './components/pageList';
 import ManagementToolbar from './components/Toolbar-Management';
 import PageControllToolbar from './components/Toolbar-PageControll';
 import PageViewField from './components/PageViewField'
-import React from 'react';
+import React, { useState }from 'react';
 
 function App() {
   const [chosenPage, setChosenPage] = useState({
     id: null,
-    body: null,
     title: null,
+    description: null,
+    body: null,
+    
   });
 
   const [isPageChosen, setIsPageChosen] = useState(false);
 
   // 子コンポーネントPageListで使用するハンドラー関数
   // 記事を選択したときにstateのchosenPageIdを更新する
-  const handlePageClick = page => setChosenPage(chosenPage= page)
+  const handlePageClick = page => setChosenPage(page);
 
   // render一覧
   const renderPageList = () => {
     return <PageList 
-      handlePageClick={this.handlePageClick}
+      handlePageClick={handlePageClick}
       />
-  }
+  };
 
-  renderPageViewField = () => {
+  // HTMLビューワー
+  const renderPageViewField = () => {
     return <PageViewField
-      chosenPage={this.state.chosenPage}
+      chosenPage={chosenPage}
       />
   }
 
@@ -43,10 +46,10 @@ function App() {
           <PageControllToolbar />
         </Grid>
         <Grid item xs={3}>
-          {this.renderPageList()}
+          {renderPageList()}
         </Grid>
         <Grid item xs={9}>
-          {this.renderPageViewField()}
+          {renderPageViewField()}
         </Grid>
       </Grid>      
     </div>
