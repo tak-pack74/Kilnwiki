@@ -1,5 +1,6 @@
 from sqlalchemy.orm import column_property
 from sqlalchemy.sql import func
+from flask_migrate import Migrate
 
 from . import db
 
@@ -7,7 +8,7 @@ class Page(db.Model):
     __tablename__ = 'page'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(32))
-    desctiption = db.Column(db.String(128))
+    description = db.Column(db.String(128))
     body = db.Column(db.Text)
     published_at = db.Column(db.DateTime)
     edited_at = db.Column(db.DateTime)
