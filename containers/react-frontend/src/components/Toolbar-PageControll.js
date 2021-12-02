@@ -1,12 +1,25 @@
 import React from "react";
-import { Toolbar  } from "@material-ui/core";
-
-
+import { Toolbar, TextField } from '@mui/material';
 
 const pageControllToolbar = () => {
   return (
     <div className>
-        <Toolbar>Page</Toolbar>
+        <Toolbar
+          sx={{
+            color:'#ffffff',
+            bgcolor: 'primary.main',
+          }}
+        >
+          <TextField
+            required
+            label="Page Title"
+            variant="standard"
+            sx={{
+              bgcolor: '#ffffff',
+              borderRadius: 1,
+            }}
+          />
+        </Toolbar>
     </div>
   );
 };

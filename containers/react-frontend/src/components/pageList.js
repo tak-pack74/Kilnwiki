@@ -1,22 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { List, ListItem, ListItemText } from "@material-ui/core";
-
-
-/*
-// 暫定データ（開発用）-----------------
-const createData = (id, title, body ) => {
-  return { id, title, body };
-};
-
-
-const pages = [
-  createData(1, "Test1", "# hoge"),
-  createData(2, "Test2", "## hoge"),
-  createData(3, "Test3", "### hoge"),
-  createData(4, "Test4", "#### hoge"),
-  createData(5, "Test5", "##### hoge"),
-];
-*/
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import EditIcon from '@mui/icons-material/Edit';
 
 const PageList = props => {
   const [pages, setPages] = useState([]);
@@ -39,9 +26,14 @@ const PageList = props => {
         {pages.map(
           page => (
             <ListItem button
-            onClick={() => props.handlePageClick(page)}
-            >
-            <ListItemText primary={page.title} secondary={page.body} />
+             onClick={() => props.handlePageClick(page)}
+             sx={{
+              borderRight: 1,
+              borderRadius: 1,
+              borderColor: 'grey.500'
+             }}
+             >
+              <ListItemText primary={page.title} secondary={page.body} />
             </ListItem>
           )
         )}
@@ -51,7 +43,13 @@ const PageList = props => {
 
   return (
     <div className>
-      <List component="nav">
+      <List
+       component="nav"
+       sx={{
+         borderTop: 1,
+         borderColor: 'grey.500'
+       }}
+       >
         {renderPageListItem()}
       </List>
     </div>

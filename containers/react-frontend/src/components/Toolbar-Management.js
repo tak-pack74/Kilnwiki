@@ -1,12 +1,21 @@
 import React from "react";
-import { Toolbar  } from "@material-ui/core";
+import { Toolbar } from '@mui/material';
+import CreateIcon from '@mui/icons-material/Create';
+import MenuIcon from '@mui/icons-material/Menu';
 
-
-
-const managementToolbar = () => {
+const managementToolbar = props => {
   return (
-    <div className>
-        <Toolbar>Manage</Toolbar>
+    <div>
+        <Toolbar
+         sx={{
+           bgcolor: 'primary.main',
+         }}
+         >
+          <MenuIcon />
+          <CreateIcon 
+           onClick={() => props.handleNewPageClick(true)}
+          />
+        </Toolbar>
     </div>
   );
 };
