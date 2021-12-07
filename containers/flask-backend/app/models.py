@@ -22,7 +22,7 @@ class PagesShema(ma.Schema):
     class Meta:
         fields = ("id","title", "body", "description")\
 
-
+            
 pages_schema = PagesShema()
 pages_schema = PagesShema(many=True)
 
