@@ -10,15 +10,6 @@ const pageControllToolbar = () => {
             bgcolor: 'primary.main',
           }}
         >
-          <TextField
-            required
-            label="Page Title"
-            variant="standard"
-            sx={{
-              bgcolor: '#ffffff',
-              borderRadius: 1,
-            }}
-          />
         </Toolbar>
     </div>
   );

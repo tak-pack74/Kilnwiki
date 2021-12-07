@@ -1,47 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { TextField, Button } from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
 
-import TextField from '@mui/material/TextField';
-
-import SimpleMdeReact from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
+import MDEditor from '@uiw/react-md-editor';
+import APIService from '../components/APIService'
 
 const PageEditField = props => {
-    const [title, setTitle] = useState('')
-    const [body, setBody] = useState('')
+    const [title, setTitle] = useState("");
+    const [page_body, setPageBody] = useState("Initial Value");
 
-    const toolbar = [
-        {
-            name: "save",
-            action: function customFunction(editor) {
-                alert(editor.value())
-                // save action
-            },
-            className: "fa fa-star",
-            title: "Save"
-        },
-        '|',
-        'bold',
-        'italic',
-        'heading',
-        '|',
-        'quote',
-        'unordered-list',
-        'ordered-list',
-        '|',
-        'link',
-        '|',
-        'preview',
-        'side-by-side',
-        'fullscreen',
-        '|',
-        'guide',
-    ]
+    const handlePageBodyChange = useCallback((value) => {
+        setPageBody(value);
+      }, []);
+
+    const handleSubmit = () => {
+        APIService.newPage({title,page_body});
+        props.handleNewPageClick(false)
+    };
 
     return (
         <div>
-            <SimpleMdeReact  options={{toolbar:toolbar}} value={body} onChange={body => setBody(body)}/>
+            <TextField
+              required
+              label="タイトル"
+              variant="outlined"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              sx={{
+                  bgcolor: '#ffffff',
+                  borderRadius: 1,
+                  width: '80%',
+              }}
+            />
+
+            <Button
+              variant="contained"
+              color="success"
+              startIcon={<SaveIcon />}
+              onClick= {() => handleSubmit()}
+              sx={{
+                borderRadius: 1,
+                width: '20%',
+            }}
+            >
+
+            SAVE
+            </Button>
+            <MDEditor
+              value={page_body}
+              onChange={handlePageBodyChange}
+              height={800}
+            />
         </div>
-    )
-}
+    );
+};
 
 export default PageEditField
