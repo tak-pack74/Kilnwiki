@@ -13,7 +13,7 @@ const managementToolbar = props => {
          >
           <MenuIcon />
           <CreateIcon 
-           onClick={() => props.handleNewPageClick(true)}
+           onClick={() => props.setIsEditorMode(true)}
           />
         </Toolbar>
     </div>

@@ -30,6 +30,7 @@ function App() {
   const renderPageList = () => {
     return <PageList 
       handlePageClick={handlePageClick}
+      setIsEditorMode={setIsEditorMode}
       />
   };
 
@@ -43,7 +44,7 @@ function App() {
   // Markdown編集フィールド
   const renderPageEditField = () => {
     return <PageEditField
-      handleNewPageClick={handleNewPageClick}
+    setIsEditorMode={setIsEditorMode}
       />
   }
 
@@ -52,7 +53,7 @@ function App() {
       <Grid container spacing={1}>
         <Grid item xs={3}>
           <ManagementToolbar
-           handleNewPageClick={handleNewPageClick}
+           setIsEditorMode={setIsEditorMode}
           />
         </Grid>
         <Grid item xs={9}>

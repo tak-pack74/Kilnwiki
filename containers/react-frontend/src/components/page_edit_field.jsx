@@ -15,7 +15,7 @@ const PageEditField = props => {
 
     const handleSubmit = () => {
         APIService.newPage({title,page_body});
-        props.handleNewPageClick(false)
+        props.setIsEditorMode(false)
     };
 
     return (
@@ -43,7 +43,6 @@ const PageEditField = props => {
                 width: '20%',
             }}
             >
-
             SAVE
             </Button>
             <MDEditor

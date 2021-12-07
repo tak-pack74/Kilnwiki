@@ -26,11 +26,14 @@ const PageList = props => {
         {pages.map(
           page => (
             <ListItem button
-             onClick={() => props.handlePageClick(page)}
+             onClick={() => {
+               props.handlePageClick(page);
+               props.setIsEditorMode(false);
+              }}
              sx={{
               borderRight: 1,
               borderRadius: 1,
-              borderColor: 'grey.500'
+              borderColor: 'grey.500',
              }}
              >
               <ListItemText primary={page.title} secondary={page.body} />
@@ -41,13 +44,17 @@ const PageList = props => {
     );
   };
 
+  // TODO: デザインがダサい。ウィンドウが小さくなった場合にスクロールバーが表示されるように
   return (
     <div className>
       <List
        component="nav"
        sx={{
          borderTop: 1,
-         borderColor: 'grey.500'
+         borderColor: 'grey.500',
+         maxHeight: 850,
+         position: 'relative',
+         overflow: 'auto',
        }}
        >
         {renderPageListItem()}
