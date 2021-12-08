@@ -37,7 +37,7 @@ const PageEditField = props => {
               variant="contained"
               color="success"
               startIcon={<SaveIcon />}
-              onClick= {() => handleSubmit()}
+              onClick= {handleSubmit}
               sx={{
                 borderRadius: 1,
                 width: '20%',

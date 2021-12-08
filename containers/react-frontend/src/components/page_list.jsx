@@ -1,42 +1,46 @@
-import React, { useState, useEffect } from "react";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import EditIcon from '@mui/icons-material/Edit';
+import React, { useState, useEffect, useAlert } from "react";
+import { List, ListItem, ListItemText, IconButton } from '@mui/material';
+import CreateIcon from '@mui/icons-material/Create';
+
+import APIService from '../components/APIService'
 
 const PageList = props => {
   const [pages, setPages] = useState([]);
-  
+
   useEffect(() => {
-    fetch('http://localhost:5000/pages',{
-      method: 'GET',
-      headers : {
-        'Content-Type':'application/json'
-      }
-    })
-    .then(response => response.json())
-    .then(response => setPages(response))
-    .catch(error => console.log(error))
-  },[])
-  
+    pages = APIService.fetchPages
+    setPages(pages)
+  },[]);
   const renderPageListItem = () => {
     return (
       <div>
         {pages.map(
           page => (
-            <ListItem button
-             onClick={() => {
-               props.handlePageClick(page);
-               props.setIsEditorMode(false);
-              }}
+            <ListItem 
+             button
              sx={{
               borderRight: 1,
               borderRadius: 1,
               borderColor: 'grey.500',
              }}
-             >
-              <ListItemText primary={page.title} secondary={page.body} />
+             secondaryAction={
+              <IconButton edge="end">
+                <CreateIcon 
+                  onClick={() => props.setIsEditorMode(true)}
+                />
+              </IconButton>
+             }
+            >
+
+              <ListItemText
+               primary={page.title}
+               secondary={page.body}
+               onClick={() => {
+                props.handlePageClick(page);
+                props.setIsEditorMode(false);
+               }}
+              />
+
             </ListItem>
           )
         )}

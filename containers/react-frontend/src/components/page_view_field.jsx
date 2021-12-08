@@ -1,11 +1,10 @@
 import ReactMarkdown from "react-markdown";
+import MDEditor from '@uiw/react-md-editor';
 
-function PageViewField(props) {
+const PageViewField = props => {
   return (
     <div>
-      <ReactMarkdown>
-          {props.chosenPage.body}
-      </ReactMarkdown>
+      <MDEditor.Markdown source={props.chosenPage.body} />  
     </div>
   );
 };

@@ -24,7 +24,6 @@ function App() {
   // 子コンポーネントPageListで使用するハンドラー関数
   // 記事を選択したときにstateのchosenPageIdを更新する
   const handlePageClick = page => setChosenPage(page);
-  const handleNewPageClick = isEditorMode => setIsEditorMode(isEditorMode)
 
   // render一覧
   const renderPageList = () => {
