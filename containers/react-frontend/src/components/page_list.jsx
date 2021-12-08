@@ -7,10 +7,19 @@ import APIService from '../components/APIService'
 const PageList = props => {
   const [pages, setPages] = useState([]);
 
+  // TODO: ページ一覧の取得処理をAPIService一覧に統合したい
   useEffect(() => {
-    pages = APIService.fetchPages
-    setPages(pages)
-  },[]);
+    fetch('http://localhost:5000/pages',{
+      method: 'GET',
+      headers : {
+        'Content-Type':'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(response => setPages(response))
+    .catch(error => console.log(error))
+  },[])
+
   const renderPageListItem = () => {
     return (
       <div>
@@ -45,7 +54,7 @@ const PageList = props => {
           )
         )}
       </div>
-    );
+  );
   };
 
   // TODO: デザインがダサい。ウィンドウが小さくなった場合にスクロールバーが表示されるように

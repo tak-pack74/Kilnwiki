@@ -18,20 +18,4 @@ export default class APIService{
             return console.log(error);
         }
     };
-
-    // すべてのページを取得する
-    // TODO： 選択されたタグと紐付いたページのみ取得するよう変更
-    static async fetchPages() {
-        try {
-            const response = await fetch('http://localhost:5000/fetch_pages',{
-            method: 'GET',
-            headers : {
-                'Content-Type':'application/json'
-            }
-            });
-            return response.json();
-        } catch (error) {
-            return console.log(error)
-        }
-    };
 }
