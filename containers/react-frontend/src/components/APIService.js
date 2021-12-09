@@ -4,14 +4,14 @@
 
 export default class APIService{
     // 新規ページの登録処理
-    static async insertPage(body){
+    static async insertPage(page_data){
         try {
             const response = await fetch(`http://localhost:5000/insert_page`, {
                 'method': 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(page_data)
             });
             return await response.json();
         } catch (error) {
