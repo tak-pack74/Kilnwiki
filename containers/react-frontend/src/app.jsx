@@ -2,8 +2,8 @@ import './App.css';
 import { Grid } from "@material-ui/core";
 
 import PageList from './components/page_list';
-import ManagementToolbar from './components/toolbar_overall_management';
-import PageControllToolbar from './components/toolbar_page_contoll';
+import MenuBar from './components/menu_bar';
+import PageToolbar from './components/page_toolbar';
 import PageViewField from './components/page_view_field';
 import PageEditField from './components/page_edit_field';
 import React, { useState }from 'react';
@@ -13,22 +13,18 @@ function App() {
   const [chosenPage, setChosenPage] = useState({
     id: null,
     title: null,
-    description: null,
-    body: null,
   });
 
   const [isPageChosen, setIsPageChosen] = useState(false);
+
+  // 右下のフィールドを決定するstate
+  // true => Edit フィールド,  false => View フィールド
   const [isEditorMode, setIsEditorMode] = useState(false);
-  // --------------------------
 
-  // 子コンポーネントPageListで使用するハンドラー関数
-  // 記事を選択したときにstateのchosenPageIdを更新する
-  const handlePageClick = page => setChosenPage(page);
-
-  // render一覧
+  // ページ一覧
   const renderPageList = () => {
     return <PageList 
-      handlePageClick={handlePageClick}
+      setChosenPage={setChosenPage}
       setIsEditorMode={setIsEditorMode}
       />
   };
@@ -43,7 +39,9 @@ function App() {
   // Markdown編集フィールド
   const renderPageEditField = () => {
     return <PageEditField
-    setIsEditorMode={setIsEditorMode}
+      setIsEditorMode={setIsEditorMode}
+      setChosenPage={setChosenPage}
+      chosenPage={chosenPage}
       />
   }
 
@@ -51,12 +49,16 @@ function App() {
     <div>
       <Grid container spacing={1}>
         <Grid item xs={3}>
-          <ManagementToolbar
+          <MenuBar
            setIsEditorMode={setIsEditorMode}
+           setChosenPage={setChosenPage}
           />
         </Grid>
         <Grid item xs={9}>
-          <PageControllToolbar />
+          <PageToolbar
+            setIsEditorMode={setIsEditorMode}
+            isEditorMode={isEditorMode}
+          />
         </Grid>
         <Grid item xs={3}>
           {renderPageList()}

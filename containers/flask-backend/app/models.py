@@ -25,12 +25,20 @@ class Page(db.Model):
 
 # marshmallowスキーマを生成するためのクラス
 # 主に routes.py で ページデータのシリアライズに利用する
-class PagesShema(marshmallow.Schema):
+
+# ページ一覧
+class PageListSchema(marshmallow.Schema):
     class Meta:
-        fields = ("id","title", "body", "published_at", "edited_at") 
-            
-page_schema = PagesShema()
-pages_schema = PagesShema(many=True)
+        fields = ("id","title")
+
+pagelist_schema = PageListSchema(many=True)
+
+# 単一ページの詳細情報
+class PageSchema(marshmallow.Schema):
+    class Meta:
+        fields = ("id","title", "body", "published_at", "edited_at")
+
+page_schema = PageSchema()
 
 
 """ 将来的に必要な Tagモデル
