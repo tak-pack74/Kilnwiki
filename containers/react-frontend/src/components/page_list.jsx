@@ -9,7 +9,7 @@ const PageList = props => {
 
   // TODO: ページ一覧の取得処理をAPIService一覧に統合したい
   useEffect(() => {
-    fetch('http://localhost:5000/pages',{
+    fetch('http://localhost:5000/fetch_page_list',{
       method: 'GET',
       headers : {
         'Content-Type':'application/json'
@@ -25,32 +25,26 @@ const PageList = props => {
       <div>
         {pages.map(
           page => (
+            <div>
             <ListItem 
-             button
-             sx={{
-              borderRight: 1,
-              borderRadius: 1,
-              borderColor: 'grey.500',
-             }}
-             secondaryAction={
-              <IconButton edge="end">
-                <CreateIcon 
-                  onClick={() => props.setIsEditorMode(true)}
-                />
-              </IconButton>
-             }
-            >
-
-              <ListItemText
-               primary={page.title}
-               secondary={page.body}
-               onClick={() => {
-                props.handlePageClick(page);
+              button
+              sx={{
+               borderBottom: 1,
+               borderColor: 'grey.300',
+              }}
+              onClick={() => {
+                props.setChosenPage(page);
                 props.setIsEditorMode(false);
-               }}
+              }}
+            >
+              <ListItemText
+                primary={page.title}
+                sx={{
+                  height: '100%'
+                }}
               />
-
             </ListItem>
+            </div>
           )
         )}
       </div>
@@ -59,7 +53,7 @@ const PageList = props => {
 
   // TODO: デザインがダサい。ウィンドウが小さくなった場合にスクロールバーが表示されるように
   return (
-    <div className>
+    <div>
       <List
        component="nav"
        sx={{

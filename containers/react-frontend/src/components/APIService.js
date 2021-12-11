@@ -18,4 +18,18 @@ export default class APIService{
             return console.log(error);
         }
     };
+    static async updatePage(id, page_data){
+        try {
+            const response = await fetch(`http://localhost:5000/update_page/${id}`, {
+                'method': 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(page_data)
+            });
+            return await response.json();
+        } catch (error) {
+            return console.log(error);
+        }
+    };   
 }

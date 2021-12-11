@@ -1,5 +1,4 @@
 # python 仮想環境
 containers/flask-backend/venv/
-containers/flask-backend/app/__pycache__/
-
-containers/flask-backend/app/main/__pycache__
+containers/flask-backend/__pycache__/
+__pycache__/

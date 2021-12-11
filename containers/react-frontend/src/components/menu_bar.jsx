@@ -12,23 +12,23 @@ const menuBar = props => {
           color: '#ffffff'
         }}
       > 
-        {/* TODO： その他管理ボタン 未使用 */}
-        <MenuIcon sx={{ mr: 2 }}/>
-        
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          KilnWiki Pages
-        </Typography>
-        
-        {/* 新規ページ編集ボタン ペンシルアイコン */}
-        <IconButton sx={{color: '#ffffff'}}>
-          <CreateIcon 
+          {/* TODO： その他管理ボタン 未使用 */}
+          <MenuIcon sx={{ mr: 2 }}/>
+          
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            KilnWiki Pages
+          </Typography>
+          
+          {/* 新規ページ編集ボタン ペンシルアイコン */}
+          <IconButton
+            sx={{color: '#ffffff'}}
             onClick={() => {
               props.setChosenPage({})
               props.setIsEditorMode(true);
             }}
-          />
-        </IconButton>
-        
+          >
+            <CreateIcon/>
+          </IconButton>
       </Toolbar>
     </div>
   );
