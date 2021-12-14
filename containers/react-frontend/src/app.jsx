@@ -15,8 +15,6 @@ function App() {
     title: null,
   });
 
-  const [isPageChosen, setIsPageChosen] = useState(false);
-
   // 右下のフィールドを決定するstate
   // true => Edit フィールド,  false => View フィールド
   const [isEditorMode, setIsEditorMode] = useState(false);
