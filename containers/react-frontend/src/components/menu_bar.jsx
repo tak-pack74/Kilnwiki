@@ -8,7 +8,7 @@ const menuBar = props => {
     <div>
       <Toolbar
         sx={{
-          bgcolor: 'primary.main',
+          bgcolor: '#b55233',
           color: '#ffffff'
         }}
       > 
@@ -21,7 +21,7 @@ const menuBar = props => {
           
           {/* 新規ページ編集ボタン ペンシルアイコン */}
           <IconButton
-            sx={{color: '#ffffff'}}
+            sx={{color: '#242424', bgcolor: '#97b533', border: 1}}
             onClick={() => {
               props.setChosenPage({})
               props.setIsEditorMode(true);

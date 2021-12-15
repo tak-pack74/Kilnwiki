@@ -55,6 +55,7 @@ function App() {
         <Grid item xs={9}>
           <PageToolbar
             setIsEditorMode={setIsEditorMode}
+            chosenPage={chosenPage}
             isEditorMode={isEditorMode}
           />
         </Grid>
