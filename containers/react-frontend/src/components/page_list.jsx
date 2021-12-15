@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useAlert } from "react";
-import { List, ListItem, ListItemText, IconButton } from '@mui/material';
-import CreateIcon from '@mui/icons-material/Create';
-
-import APIService from '../components/APIService'
+import React, { useState, useEffect } from "react";
+import { List, ListItem, ListItemText } from '@mui/material';
 
 const PageList = props => {
   const [pages, setPages] = useState([]);

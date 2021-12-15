@@ -58,3 +58,12 @@ def update_page(id):
     db.session.commit()
 
     return page_schema.jsonify(page)
+
+@main.route('/drop_page/<int:id>', methods=['DELETE'], strict_slashes=False)
+def delete_page(id):
+    page = Page.query.get_or_404(id)
+
+    db.session.delete(page)
+    db.session.commit()
+
+    return page_schema.jsonify(page)
