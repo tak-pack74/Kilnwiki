@@ -1,6 +1,7 @@
 #!/bin/sh
 . venv/bin/activate
 
+## DBコンテナが完成し、flask migrationが完了するまでリトライを繰り返す
 while true; do
     venv/bin/flask deploy
     result=$?
@@ -11,6 +12,7 @@ while true; do
     sleep 5
 done
 
+## アプリケーションの起動。こちらでもリトライしているが、しっかりとした理由はない
 while true; do
     venv/bin/flask run --host=0.0.0.0
     result=$?

@@ -1,5 +1,6 @@
 import os
 
+# 共通設定
 class Config:
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{
         'user': os.environ.get('MYSQL_USERNAME'),
@@ -26,6 +27,7 @@ class DockerConfig(Config):
         'password': os.environ.get('MYSQL_PASSWORD'),
         'db_name': os.environ.get('MYSQL_DB_NAME')
     })
+    DEBUG = False
 
 config = {
     'development': DevelopmentConfig,
