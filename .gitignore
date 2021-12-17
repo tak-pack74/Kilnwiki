@@ -1,5 +1,7 @@
-# python 仮想環境
 containers/flask-backend/venv/
 __pycache__/
 .env-flask
 .env-mysql
+
+
+.vscode
