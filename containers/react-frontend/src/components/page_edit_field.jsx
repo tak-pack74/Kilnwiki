@@ -51,7 +51,7 @@ const PageEditField = props => {
             required
             label="Title"
             variant="outlined"
-            value={page_title ? page_title : ''}  // 三項演算子を利用しない場合、labelとvalueがオーバラップする
+            value={page_title ? page_title : ''}  // 三項演算子を利用しないと、labelとvalueがオーバラップする。
             onChange={e => setPageTitle(e.target.value)}
             sx={{
                 bgcolor: '#ffffff',
@@ -68,9 +68,12 @@ const PageEditField = props => {
             sx={{
               borderRadius: 1,
               width: '20%',
-          }}
+            }}
           >
-          SAVE
+            {page_id
+              ? 'Save Changes' // 編集
+              : 'POST' // 新規投稿
+            }
           </Button>
           <MDEditor
             value={page_body}

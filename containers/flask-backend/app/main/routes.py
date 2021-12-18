@@ -10,7 +10,7 @@ from sqlalchemy.orm import load_only
 
 from . import main
 from .. import db
-from ..models import Page,page_schema,pagelist_schema
+from ..models import Page, page_schema, pagelist_schema, Tag, tag_schema, tags_schema
 
 # DBのpageテーブルから全レコード（idとtitleのみ）を取得する
 # TODO: idとtitleだけが入ったデータを page_list と名付けて良いものか
@@ -23,7 +23,6 @@ def fetch_page_list():
     return jsonify(results)
 
 # DBのpageテーブルからidをキーにページ情報を取得する
-# TODO: 選択したタグがついた記事だけを取得するように変更する
 @main.route('/fetch_page/<int:id>', methods=['GET'])
 def fetch_page(id):
     page = Page.query.filter_by(id=id).first()
@@ -67,3 +66,25 @@ def delete_page(id):
     db.session.commit()
 
     return page_schema.jsonify(page)
+
+@main.route('/insert_tag', methods=['POST'], strict_slashes=False)
+def insert_tag():
+    name = request.json['tag_name']
+    description = request.json['tag_description']
+
+    tag = Tag(
+        name=name,
+        description=description
+    )
+
+    db.session.add(tag)
+    db.session.commit()
+
+    return tag_schema.jsonify(tag)
+
+@main.route('/fetch_all_tags', methods=['GET'], strict_slashes=False)
+def fetch_all_tags():
+    tags = Tag.query.all()
+    results = tags_schema.dump(tags)
+
+    return jsonify(results)

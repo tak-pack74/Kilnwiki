@@ -42,4 +42,19 @@ export default class APIService{
             return console.log(error);
         }
     };   
+
+    static async insertTag(tag_data){
+        try {
+            const response = await fetch(`http://localhost:5000/insert_tag`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(tag_data)
+            });
+            return await response.json();
+        } catch (error) {
+            return console.log(error);
+        }
+    };
 }

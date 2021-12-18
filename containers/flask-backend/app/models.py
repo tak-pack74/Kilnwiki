@@ -22,7 +22,7 @@ class Page(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime)
 
-    tag_map = relationship("PageTagMap", back_populates="page")
+    page_tag_map = relationship("PageTagMap", back_populates="page")
     
     def __repr__(self):
         return '<Page %r>' % self.title
@@ -51,10 +51,17 @@ class Tag(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime)
 
-    page_map = relationship("PageTagMap", back_populates="tag")
+    page_tag_map = relationship("PageTagMap", back_populates="tag")
     
     def __repr__(self):
-        return '<Tag %r>' % self.title
+        return '<Tag %r>' % self.name
+
+class TagSchema(marshmallow.Schema):
+    class Meta:
+        fields = ("id","name", "description")
+
+tag_schema = TagSchema()
+tags_schema = TagSchema(many=True)
 
 # ページとタグの中間テーブル。いわゆるTOXI法でページとタグの関連付けを表現する
 class PageTagMap(db.Model):
@@ -65,8 +72,8 @@ class PageTagMap(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime)
 
-    page = relationship("page", back_populates="page_tag_map")
-    tag = relationship("tag", back_populates="page_tag_map")
+    page = relationship("Page", back_populates="page_tag_map")
+    tag = relationship("Tag", back_populates="page_tag_map")
 
     def __repr__(self):
         return '<PageTagMap %r>' % self.title
