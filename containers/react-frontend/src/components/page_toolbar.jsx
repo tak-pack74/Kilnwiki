@@ -19,7 +19,7 @@ const PageToolbar = props => {
   };
 
   const handleDelete = () => {
-    APIService.dropPage(props.chosenPage.id)
+    APIService.deletePage(props.chosenPage.id)
     props.setIsEditorMode(false)
   };
 
@@ -32,7 +32,7 @@ const PageToolbar = props => {
         }}
         variant="outlined"
         startIcon={<CreateIcon />}
-        sx={{ color: '#242424' , bgcolor: '#97b533', border: 1}}
+        sx={{ color: 'black' , bgcolor: 'white', border: '1px solid black'}}
       >
         EDIT
       </Button>
@@ -43,7 +43,7 @@ const PageToolbar = props => {
       <div>
         <IconButton
           size="medium"
-          sx={{ color: '#ffffff' }}
+          sx={{ color: 'black', ml: 3 }}
           onClick={handleClick}
         >
           <MoreHorizRoundedIcon />
@@ -71,8 +71,8 @@ const PageToolbar = props => {
     <div>
       <Toolbar
         sx={{
-        color: '#ffffff',
-        bgcolor: '#b55233',
+        color: '#000000',
+        bgcolor: '#ffffff',
         }}
       >
         <Grid container justifyContent='flex-end'>

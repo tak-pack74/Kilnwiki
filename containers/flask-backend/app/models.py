@@ -58,7 +58,7 @@ class Tag(db.Model):
 
 class TagSchema(marshmallow.Schema):
     class Meta:
-        fields = ("id","name", "description")
+        fields = ("id", "name", "description")
 
 tag_schema = TagSchema()
 tags_schema = TagSchema(many=True)
@@ -67,13 +67,13 @@ tags_schema = TagSchema(many=True)
 class PageTagMap(db.Model):
     __tablename__  = 'page_tag_map'
     id = db.Column(db.Integer, primary_key=True)
-    page_id = db.Column(db.Integer, db.ForeignKey('page.id'))
-    tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'))
-    created_at = db.Column(db.DateTime, default=datetime.now)
-    updated_at = db.Column(db.DateTime)
-
+    page_id = db.Column(db.Integer, db.ForeignKey('page.id'), nullable=False)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tag.id'), nullable=False)
+    
     page = relationship("Page", back_populates="page_tag_map")
     tag = relationship("Tag", back_populates="page_tag_map")
+
+    __table_args__ = (db.UniqueConstraint('page_id', 'tag_id'),)
 
     def __repr__(self):
         return '<PageTagMap %r>' % self.title

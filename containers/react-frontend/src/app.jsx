@@ -22,8 +22,9 @@ function App() {
   // ページ一覧
   const renderPageList = () => {
     return <PageList 
-      setChosenPage={setChosenPage}
-      setIsEditorMode={setIsEditorMode}
+        chosenPage={chosenPage}
+        setChosenPage={setChosenPage}
+        setIsEditorMode={setIsEditorMode}
       />
   };
 
@@ -43,26 +44,31 @@ function App() {
       />
   }
 
+  const gridStyle = {
+    border: "1px solid",
+    borderColor: "#dcdcdc",
+  }
+
   return (
     <div>
       <Grid container spacing={1}>
-        <Grid item xs={3}>
+        <Grid item xs={3} style={gridStyle}>
           <MenuBar
            setIsEditorMode={setIsEditorMode}
            setChosenPage={setChosenPage}
           />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={9} style={gridStyle}>
           <PageToolbar
             setIsEditorMode={setIsEditorMode}
             chosenPage={chosenPage}
             isEditorMode={isEditorMode}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={3} style={gridStyle}>
           {renderPageList()}
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={9} style={gridStyle}>
           {isEditorMode
             ? renderPageEditField()
             : renderPageViewField() 
