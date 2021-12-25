@@ -32,9 +32,35 @@ export default class APIService{
             return console.log(error);
         }
     };   
-    static async dropPage(id){
+    static async deletePage(id){
         try {
-            const response = await fetch(`http://localhost:5000/drop_page/${id}`, {
+            const response = await fetch(`http://localhost:5000/delete_page/${id}`, {
+                method: 'DELETE',
+            });
+            return await response.json();
+        } catch (error) {
+            return console.log(error);
+        }
+    };   
+
+    static async insertTag(tag_data){
+        try {
+            const response = await fetch(`http://localhost:5000/insert_tag`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(tag_data)
+            });
+            return await response.json();
+        } catch (error) {
+            return console.log(error);
+        }
+    };
+
+    static async deleteTag(id){
+        try {
+            const response = await fetch(`http://localhost:5000/delete_tag/${id}`, {
                 method: 'DELETE',
             });
             return await response.json();
