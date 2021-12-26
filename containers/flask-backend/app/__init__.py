@@ -22,8 +22,8 @@ def create_app(config_name):
     
     # 拡張機能の初期化処理（よくわからない）
     db.init_app(app)
-    marshmallow.init_app(app)
     cors.init_app(app)
+    marshmallow.init_app(app)
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)

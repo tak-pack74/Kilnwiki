@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 import MDEditor from '@uiw/react-md-editor';
 
-
+import APIService from './APIService'
 
 const PageViewField = props => {
   const [page, setPage] = useState({
@@ -11,20 +11,13 @@ const PageViewField = props => {
     title: null,
     body: null,
   });
-  const [tags, setTags] = useState([])
 
   useEffect(() => {
     if (props.chosenPage.id) {
-      fetch(`http://localhost:5000/fetch_page/${props.chosenPage.id}`, {
-        method: 'GET',
-        headers : {
-          'Content-Type':'application/json'
-        }
-      })
+      APIService.fetchPage(props.chosenPage.id)
       .then(response => response.json())
       .then(response => {
         setPage(response.page);
-        setTags(response.tags);
       })
       .catch(error => console.log(error))
     }

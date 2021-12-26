@@ -5,6 +5,7 @@ import LabelSharpIcon from '@mui/icons-material/LabelSharp';
 import TagSelector from './tag_selector'
 import TagEditor from './tag_editor'
 
+import APIService from './APIService'
 
 const PageList = props => {
   const [pages, setPages] = useState([]);
@@ -18,18 +19,12 @@ const PageList = props => {
   // TODO: ページ一覧の取得処理をAPIService一覧に統合したい
   useEffect(() => {
     let params = [];
-
     for (let i = 0; i < selectedTags.length; i++) {
       params.push(['selected_tag', selectedTags[i]])
     }
     const query_param = new URLSearchParams(params)
 
-    fetch(`http://localhost:5000/fetch_page_list?${query_param}`,{
-      method: 'GET',
-      headers : {
-        'Content-Type':'application/json'
-      }
-    })
+    APIService.fetchPageList(query_param)
     .then(response => response.json())
     .then(response => setPages(response))
     .catch(error => console.log(error))
@@ -89,7 +84,7 @@ const PageList = props => {
                 button
                 sx={{ 
                   borderBottom: 1,
-                  borderRight: page.id == props.chosenPage.id ? 10 : 0,
+                  borderRight: page.id === props.chosenPage.id ? 10 : 0,
                   borderColor: 'grey.300',
                 }}
                 onClick={() => {

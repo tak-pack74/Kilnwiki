@@ -32,12 +32,7 @@ const TagEditor = props => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:5000/fetch_all_tags',{
-      method: 'GET',
-      headers : {
-        'Content-Type':'application/json'
-      }
-    })
+    APIService.fetchAllTags()
     .then(response => response.json())
     .then(response => setTags(response))
     .catch(error => console.log(error))
