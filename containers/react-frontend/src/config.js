@@ -5,9 +5,10 @@ class DevelopmentConfig{
 }
 
 class DockerContainerConfig{
-    static flask_host = window.location.hostname;
-    static flask_port = 80;
-    static flask_url = `http://${this.flask_host}:${this.flask_port}`
+    // window.location.host は 現ページのURLなので このflask_hostは正確には nginxコンテナを指す。
+    // 修正は将来。。。
+    static flask_host = window.location.host;
+    static flask_url = `http://${this.flask_host}`
 }
 
 export const config_dict = {

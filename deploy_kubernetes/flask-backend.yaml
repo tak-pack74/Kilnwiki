@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-backendapi
+spec:
+  type: ClusterIP
+  ports: 
+  - name: flask-backendapi-clusterip
+    protocol: "TCP"
+    port: 5000
+    targetPort: 5000
+  selector:
+    tier: flask-backendapi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-backendapi
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      tier: flask-backendapi
+  template:
+    metadata:
+      labels:
+        tier: flask-backendapi
+    spec:
+      containers:
+        - name: flask-backendapi-container
+          image: mice74yamada/kilnwiki-backendapi
+          ports:
+          - containerPort: 5000
+          env:
+          - name: FLASK_CONFIG
+            value: 'kubernetes'
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: mysql-auth
+                key: mysql_user_name
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-auth
+                key: mysql_password
+          resources:
+            limits:
+              memory: "1280Mi"
+              cpu: "1000m"
+---
