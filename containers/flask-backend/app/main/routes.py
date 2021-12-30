@@ -16,7 +16,7 @@ from ..models import Page, page_schema, pagelist_schema, Tag, tag_schema, tags_s
 
 
 # DBへ新規ページのレコードを登録するAPI
-@main.route('/insert_page', methods=['POST'], strict_slashes=False)
+@main.route('/api/insert_page', methods=['POST'], strict_slashes=False)
 def insert_page():
     title = request.json['page_title']
     body = request.json['page_body']
@@ -40,7 +40,7 @@ def insert_page():
     return page_schema.jsonify(page)
 
 # DBのpageテーブルから全レコード（idとtitleのみ）を取得する
-@main.route('/fetch_page_list', methods=['GET'])
+@main.route('/api/fetch_page_list', methods=['GET'])
 def fetch_page_list():
     # ?selected_tag=1&selected_tag=4  => [1,4]
     selected_tags = request.args.getlist(key='selected_tag', type=int)
@@ -61,7 +61,7 @@ def fetch_page_list():
 
 
 # DBのpageテーブルからidをキーにページ情報を取得する
-@main.route('/fetch_page/<int:id>', methods=['GET'])
+@main.route('/api/fetch_page/<int:id>', methods=['GET'])
 def fetch_page(id):
     page = Page.query.filter_by(id=id).first()
     
@@ -78,7 +78,7 @@ def fetch_page(id):
     )
 
 # DBへ更新されたページの情報を反映するAPI
-@main.route('/update_page/<int:id>', methods=['PUT'], strict_slashes=False)
+@main.route('/api/update_page/<int:id>', methods=['PUT'], strict_slashes=False)
 def update_page(id):
     page = Page.query.get_or_404(id)
     page.title = request.json['page_title']
@@ -119,7 +119,7 @@ def update_page(id):
 
     return page_schema.jsonify(page)
 
-@main.route('/delete_page/<int:id>', methods=['DELETE'], strict_slashes=False)
+@main.route('/api/delete_page/<int:id>', methods=['DELETE'], strict_slashes=False)
 def delete_page(id):
     page = Page.query.get_or_404(id)
 
@@ -132,7 +132,7 @@ def delete_page(id):
 
     return page_schema.jsonify(page)
 
-@main.route('/insert_tag', methods=['POST'], strict_slashes=False)
+@main.route('/api/insert_tag', methods=['POST'], strict_slashes=False)
 def insert_tag():
     name = request.json['tag_name']
     description = request.json['tag_description']
@@ -144,14 +144,14 @@ def insert_tag():
 
     return tag_schema.jsonify(tag)
 
-@main.route('/fetch_all_tags', methods=['GET'], strict_slashes=False)
+@main.route('/api/fetch_all_tags', methods=['GET'], strict_slashes=False)
 def fetch_all_tags():
     tags = Tag.query.all()
     results = tags_schema.dump(tags)
 
     return jsonify(results)
 
-@main.route('/delete_tag/<int:id>', methods=['DELETE'], strict_slashes=False)
+@main.route('/api/delete_tag/<int:id>', methods=['DELETE'], strict_slashes=False)
 def delete_tag(id):
     tag = Tag.query.get_or_404(id)
 

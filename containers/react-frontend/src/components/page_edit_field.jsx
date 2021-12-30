@@ -22,12 +22,7 @@ const PageEditField = props => {
   // TODO: pageViewの時点でfetchしてきているので、わざわざ再取得するのは如何か
   useEffect(() => {
     if (props.chosenPage.id) {
-      fetch(`http://localhost:5000/fetch_page/${props.chosenPage.id}`, {
-        method: 'GET',
-        headers : {
-          'Content-Type':'application/json'
-        }
-      })
+      APIService.fetchPage(props.chosenPage.id)
       .then(response => response.json())
       .then(response => {
         setPageId(response.page.id)

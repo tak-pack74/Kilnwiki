@@ -1,0 +1,31 @@
+version: '3'
+services:
+  react-frontend:
+    image: mice74yamada/kilnwiki-frontend
+    ports:
+      - "8085:80"
+    environment:
+      - REACT_APP_CONFIG_NAME=docker-compose
+      - NGINX_RESOLVER_NAME=127.0.0.11
+    restart: always
+  flask-backendapi:
+    image: mice74yamada/kilnwiki-backendapi
+    environment:
+      - FLASK_CONFIG=docker-compose
+    env_file: .env
+    ports:
+      - "5000:5000"
+    restart: always
+  mysql-db:
+    image: "mysql/mysql-server:5.7"
+    volumes:
+      - mysql-db-volume:/var/lib/mysql
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_DATABASE=kilnwiki_db
+    env_file: .env
+    restart: always
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+
+volumes:
+  mysql-db-volume:

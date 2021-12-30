@@ -1,0 +1,5 @@
+namespace: kilnwiki
+resources: 
+- mysql-database.yaml
+- flask-backend.yaml
+- react-frontend.yaml

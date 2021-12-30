@@ -2,18 +2,16 @@ import React, { useState, useEffect } from "react";
 import { TableContainer, Table, TableHead, TableBody, TableRow,
          TableCell, Modal, Box, Checkbox } from '@mui/material';
 
+import APIService from './APIService'
+
 const TagSelector = props => {
-  const handleTagSelectorClose = () => props.setIsTagSelectorOpened(false)
   const [tags, setTags] = useState([]);
+  
+  const handleTagSelectorClose = () => props.setIsTagSelectorOpened(false)
 
   useEffect(() => {
     if (props.isTagSelectorOpened === true) {
-      fetch('http://localhost:5000/fetch_all_tags',{
-      method: 'GET',
-      headers : {
-        'Content-Type':'application/json'
-      }
-      })
+      APIService.fetchAllTags()
       .then(response => response.json())
       .then(response => setTags(response))
       .catch(error => console.log(error))
