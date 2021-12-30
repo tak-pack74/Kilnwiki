@@ -5,7 +5,7 @@ metadata:
 spec:
   type: ClusterIP
   ports: 
-  - name: flask-backendapi-clusterip
+  - name: flask-backendapi
     protocol: "TCP"
     port: 5000
     targetPort: 5000
@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: flask-backendapi
 spec:
-  replicas: 1
+  replicas: 2
   selector: 
     matchLabels:
       tier: flask-backendapi
@@ -48,5 +48,8 @@ spec:
           resources:
             limits:
               memory: "1280Mi"
-              cpu: "1000m"
+              cpu: "1"
+            requests:
+              memory: "640Mi"
+              cpu: 300m
 ---

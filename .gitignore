@@ -1,6 +1,4 @@
 containers/flask-backend/venv/
 __pycache__/
 .env
-
-
 .vscode

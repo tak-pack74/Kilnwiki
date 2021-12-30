@@ -97,7 +97,7 @@ const TagEditor = props => {
       <Modal open={props.isTagEditorOpened} onClose={handleTagEditorClose} >
         <Box sx={tagEditorStyle}>
           <Grid container>
-            <Grid item xs={4}>
+            <Grid item xs={12}>
               <TextField
                 required
                 label="Tag Name"
@@ -113,29 +113,29 @@ const TagEditor = props => {
                 variant="standard"
               />
             </Grid>
-            <Grid item xs={8}>
-              <IconButton 
-                onClick={handleTagSubmit}  
-                size='medium' sx={{ ml: 4, bgcolor: '#eeeeee'}}
-              >
-                <AddCircleOutlineIcon />
-              </IconButton>
-            </Grid>
-            <Grid item xs>
+            <Grid item xs={10}>
               <TextField
                 label="Tag Description"
                 onChange={e => setTagDescription(e.target.value)}
                 value={tag_description ? tag_description : ''}
                 variant="standard"
                 InputProps={{
-                startAdornment: (
+                  startAdornment: (
                   <InputAdornment position="start">
                     <TextSnippetIcon />
                   </InputAdornment>
-                ),
+                )
                 }}
                 sx={{ width: '80%'}}
               />
+            </Grid>
+            <Grid item xs={2}>
+              <IconButton 
+                onClick={handleTagSubmit}  
+                size='medium' sx={{ ml: 4, bgcolor: '#eeeeee'}}
+              >
+                <AddCircleOutlineIcon />
+              </IconButton>
             </Grid>
           </Grid>
           <Divider sx={{ pt: 1 }}/>

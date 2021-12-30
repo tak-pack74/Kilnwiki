@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-frontend-loadbalancer
+  name: react-frontend
 spec:
   type: LoadBalancer
   ports: 
@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: frontend-deploy
 spec:
-  replicas: 1
+  replicas: 2
   selector: 
     matchLabels:
       tier: react-frontend
@@ -34,8 +34,11 @@ spec:
           - containerPort: 80
           env:
           - name: NGINX_RESOLVER_NAME
-            value: kilnwiki.svc.cluster.local #[TODO] 動的に内部DNS名を取得する方法があれば、それを採用する
+            value: "kube-dns.kube-system.svc.cluster.local valid=5s"
           resources:
             limits:
               memory: "1280Mi"
-              cpu: "1000m"
+              cpu: "1"
+            requests:
+              memory: "640Mi"
+              cpu: 300m
