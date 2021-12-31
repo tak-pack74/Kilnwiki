@@ -41,14 +41,20 @@ const PageEditField = props => {
   const handleSubmit = () => {
     if (page_id) {
       // idがpropsとして渡された＝既存ページの編集時
-      APIService.updatePage(page_id, {page_title,page_body,selected_tags});
+      APIService.updatePage(page_id, {page_title,page_body,selected_tags})
+      .then(response => {
+        props.setChosenPage(response.page)
+      });
       props.setIsEditorMode(false);
     } else {
       // 新規作成時
-      console.log({page_title, page_body, selected_tags})
-      APIService.insertPage({page_title, page_body, selected_tags});
+      APIService.insertPage({page_title, page_body, selected_tags})
+      .then(response => {
+        props.setChosenPage(response.page)
+      });
       props.setIsEditorMode(false);
-    }
+    };
+    props.setOnPagePost(!props.onPagePost);
   };
 
   return (

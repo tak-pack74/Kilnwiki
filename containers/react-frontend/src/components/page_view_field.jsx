@@ -15,20 +15,27 @@ const PageViewField = props => {
   useEffect(() => {
     if (props.chosenPage.id) {
       APIService.fetchPage(props.chosenPage.id)
-      .then(response => response.json())
       .then(response => {
         setPage(response.page);
       })
       .catch(error => console.log(error))
+    } else if(props.chosenPage.id === null){
+      setPage({id:null,title: null,body: null,});
     }
-  }, [props.chosenPage.id])
+  }, [props.chosenPage])
 
   return (
     <div>
-      <Box sx={{ width: '95%', margin: 'auto'}}>
+      <Box sx={{ width: '95%', margin: 'auto' }}>
         <MDEditor.Markdown 
-          source={page.body} 
-          height='100%'
+          source={page.body}
+          style={{
+            height:'880px',
+            witdh: '100%',
+            maxHeight:'850px',
+            overflow:"scroll",
+            paddingRight: 10
+          }}
           previewOptions={{
             disallowedElements: ["h1"]
           }}

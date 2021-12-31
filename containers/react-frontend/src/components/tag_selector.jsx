@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TableContainer, Table, TableHead, TableBody, TableRow,
          TableCell, Modal, Box, Checkbox } from '@mui/material';
-
+         
 import APIService from './APIService'
 
 const TagSelector = props => {
@@ -12,7 +12,6 @@ const TagSelector = props => {
   useEffect(() => {
     if (props.isTagSelectorOpened === true) {
       APIService.fetchAllTags()
-      .then(response => response.json())
       .then(response => setTags(response))
       .catch(error => console.log(error))
       }
@@ -40,7 +39,7 @@ const TagSelector = props => {
       <TableContainer sx={{height: '100%'}}>
         <Table stickyHeader size="small">
           <TableHead>
-            <TableRow>
+            <TableRow key="table-header">
               <TableCell  align="center"></TableCell>
               <TableCell style={{ width: id_width }} align="center">Id</TableCell>
               <TableCell style={{ width: name_width }} align="left">Name</TableCell>
@@ -49,7 +48,7 @@ const TagSelector = props => {
           </TableHead>
           <TableBody>
             {tags.map(tag => (
-              <TableRow>
+              <TableRow key={tag.id}>
                 <TableCell  align="center">
                 <Checkbox
                   color="primary"
@@ -86,6 +85,11 @@ const TagSelector = props => {
   return (
     <div>
       <Modal
+        BackdropProps={{
+          sx: {
+            bgcolor: 'transparent',
+          }
+        }}
         open={props.isTagSelectorOpened}
         onClose={handleTagSelectorClose}
       >
