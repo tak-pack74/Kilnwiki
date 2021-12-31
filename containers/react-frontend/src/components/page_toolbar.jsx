@@ -20,7 +20,10 @@ const PageToolbar = props => {
 
   const handleDelete = () => {
     APIService.deletePage(props.chosenPage.id)
-    props.setIsEditorMode(false)
+    .then(() => props.setOnPagePost(!props.onPagePost));
+    props.setChosenPage({id:null,title: null});
+    props.setIsEditorMode(false);
+    console.log("handler実行");
   };
 
 

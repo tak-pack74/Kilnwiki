@@ -15,6 +15,8 @@ function App() {
     title: null,
   });
 
+  const [onPagePost, setOnPagePost] = useState(false);
+
   // 右下のフィールドを決定するstate
   // true => Edit フィールド,  false => View フィールド
   const [isEditorMode, setIsEditorMode] = useState(false);
@@ -22,9 +24,11 @@ function App() {
   // ページ一覧
   const renderPageList = () => {
     return <PageList 
+        onPagePost={onPagePost}
         chosenPage={chosenPage}
         setChosenPage={setChosenPage}
         setIsEditorMode={setIsEditorMode}
+        setonPagePost={setOnPagePost}
       />
   };
 
@@ -33,15 +37,29 @@ function App() {
     return <PageViewField
       chosenPage={chosenPage}
       />
-  }
+  };
 
   // Markdown編集フィールド
   const renderPageEditField = () => {
     return <PageEditField
+      setOnPagePost={setOnPagePost}
+      setIsEditorMode={setIsEditorMode}
+      setChosenPage={setChosenPage}
+      onPagePost={onPagePost}
+      chosenPage={chosenPage}
+      />
+  };
+
+  // Markdown編集フィールド
+  const renderPageToolbar = () => {
+    return <PageToolbar
+      setOnPagePost={setOnPagePost}
       setIsEditorMode={setIsEditorMode}
       setChosenPage={setChosenPage}
       chosenPage={chosenPage}
-      />
+      isEditorMode={isEditorMode}
+      onPagePost={onPagePost}
+    />
   }
 
   const gridStyle = {
@@ -59,11 +77,7 @@ function App() {
           />
         </Grid>
         <Grid item xs={9} style={gridStyle}>
-          <PageToolbar
-            setIsEditorMode={setIsEditorMode}
-            chosenPage={chosenPage}
-            isEditorMode={isEditorMode}
-          />
+          {renderPageToolbar()}
         </Grid>
         <Grid item xs={3} style={gridStyle}>
           {renderPageList()}

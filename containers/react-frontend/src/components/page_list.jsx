@@ -21,19 +21,19 @@ const PageList = props => {
     let params = [];
     for (let i = 0; i < selectedTags.length; i++) {
       params.push(['selected_tag', selectedTags[i]])
-    }
-    const query_param = new URLSearchParams(params)
+    };
+
+    const query_param = new URLSearchParams(params);
 
     APIService.fetchPageList(query_param)
-    .then(response => response.json())
     .then(response => setPages(response))
-    .catch(error => console.log(error))
-  },[selectedTags])
+    .catch(error => console.log(error));
+  },[props.onPagePost, selectedTags])
   
   // ページ一覧の上のタグ管理フィールド。
   const renderSearchFieldItem = () => {
     return (
-      <div>
+      <div key="SearchField">
         <ListItem component="div" disablePadding
           sx={{ borderBottom: 2, borderTop: 2, borderColor: 'grey.600'}}
         >
@@ -42,6 +42,7 @@ const PageList = props => {
           <ListItemButton sx={{ height: 56 }} onClick={handleTagSelectorOpen} >
             <ListItemIcon>
               <LabelSharpIcon color="#000000" />
+              <Typography variant="h5" sx={{ paddingLeft: 1 }}> {selectedTags.length}</Typography>
             </ListItemIcon>
           </ListItemButton>
 
@@ -79,7 +80,7 @@ const PageList = props => {
       <div>
         {pages.map(
           page => (
-            <div>
+            <div key={page.id}>
               <ListItem 
                 button
                 sx={{ 

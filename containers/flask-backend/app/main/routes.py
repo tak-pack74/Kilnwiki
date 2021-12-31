@@ -14,7 +14,6 @@ from .. import db
 from ..models import Page, page_schema, pagelist_schema, Tag, tag_schema, tags_schema, PageTagMap
 
 
-
 # DBへ新規ページのレコードを登録するAPI
 @main.route('/api/insert_page', methods=['POST'], strict_slashes=False)
 def insert_page():
@@ -37,7 +36,12 @@ def insert_page():
     db.session.add_all(page_tag_maps)
     db.session.commit()
 
-    return page_schema.jsonify(page)
+    return jsonify(
+        {
+            'page': page_schema.dump(page),
+            'tags': tags
+        }
+    );
 
 # DBのpageテーブルから全レコード（idとtitleのみ）を取得する
 @main.route('/api/fetch_page_list', methods=['GET'])
@@ -56,8 +60,8 @@ def fetch_page_list():
     else:
         page_list = Page.query.options(load_only('id', 'title')).order_by(Page.id.asc()).all()
 
-    results = pagelist_schema.dump(page_list) 
-    return jsonify(results)
+    results = pagelist_schema.dump(page_list)
+    return jsonify(results);
 
 
 # DBのpageテーブルからidをキーにページ情報を取得する
@@ -75,7 +79,7 @@ def fetch_page(id):
             'page': page_schema.dump(page),
             'tags': tags
         }
-    )
+    );
 
 # DBへ更新されたページの情報を反映するAPI
 @main.route('/api/update_page/<int:id>', methods=['PUT'], strict_slashes=False)
@@ -89,8 +93,8 @@ def update_page(id):
     # TODO: 処理内容がdrop_pageの中間テーブルのレコード削除処理と重複
     page_tag_maps = PageTagMap.query.filter(PageTagMap.page_id == page.id).all()
     for page_tag_map in page_tag_maps:
-        db.session.delete(page_tag_map)
-    db.session.commit()
+        db.session.delete(page_tag_map);
+    db.session.commit();
 
     page_tag_maps = []
     for selected_tag in selected_tags:
@@ -98,26 +102,19 @@ def update_page(id):
             page_id = page.id,
             tag_id = selected_tag
         )
-        page_tag_maps.append(page_tag_map)
+        page_tag_maps.append(page_tag_map);
     
-    db.session.add_all(page_tag_maps)
-    db.session.add(page)
-    db.session.commit()
+    db.session.add_all(page_tag_maps);
+    db.session.add(page);
+    db.session.commit();
 
-    tags = request.json['selected_tags']
 
-    page_tag_maps = []
-    for tag in tags:
-        page_tag_map = PageTagMap(
-            page_id = page.id,
-            tag_id = tag
-        )
-        page_tag_maps.append(page_tag_map)
-    
-    db.session.add_all(page_tag_maps)
-    db.session.commit()
-
-    return page_schema.jsonify(page)
+    return jsonify(
+        {
+            'page': page_schema.dump(page),
+            'tags': selected_tags
+        }
+    );
 
 @main.route('/api/delete_page/<int:id>', methods=['DELETE'], strict_slashes=False)
 def delete_page(id):
@@ -142,14 +139,14 @@ def insert_tag():
     db.session.add(tag)
     db.session.commit()
 
-    return tag_schema.jsonify(tag)
+    return tag_schema.jsonify(tag);
 
 @main.route('/api/fetch_all_tags', methods=['GET'], strict_slashes=False)
 def fetch_all_tags():
     tags = Tag.query.all()
     results = tags_schema.dump(tags)
 
-    return jsonify(results)
+    return jsonify(results);
 
 @main.route('/api/delete_tag/<int:id>', methods=['DELETE'], strict_slashes=False)
 def delete_tag(id):
@@ -162,4 +159,4 @@ def delete_tag(id):
     db.session.delete(tag)
     db.session.commit()
 
-    return page_schema.jsonify(tag)
+    return page_schema.jsonify(tag);

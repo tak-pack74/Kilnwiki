@@ -33,7 +33,6 @@ const TagEditor = props => {
 
   useEffect(() => {
     APIService.fetchAllTags()
-    .then(response => response.json())
     .then(response => setTags(response))
     .catch(error => console.log(error))
     setIsLoading(false)
@@ -48,19 +47,19 @@ const TagEditor = props => {
       <TableContainer sx={{height: '80%'}}>
         <Table stickyHeader size="small">
           <TableHead>
-            <TableRow>
-              <TableCell style={{ width: column_id_width }} align="center">Id</TableCell>
-              <TableCell style={{ width: column_name_width }} align="left">Name</TableCell>
-              <TableCell style={{ width: column_description_width }} align="left">Description</TableCell>
-              <TableCell></TableCell> {/* 削除・編集ボタン用の領域*/}
+            <TableRow key="table-header">
+              <TableCell style={{ width:column_id_width }} align="center">Id</TableCell>
+              <TableCell style={{ width:column_name_width }} align="left">Name</TableCell>
+              <TableCell style={{ width:column_description_width }} align="left">Description</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {tags.map(tag => (
-              <TableRow>
-                <TableCell style={{ width: column_id_width }} align="center" component="th" scope="row">{tag.id}</TableCell>
-                <TableCell style={{ width: column_name_width }} align="left">{tag.name}</TableCell>
-                <TableCell style={{ width: column_description_width }} align="left">{tag.description}</TableCell>
+            {tags && tags.map(tag => (
+              <TableRow key={tag.id}>
+                <TableCell style={{ width:column_id_width }} align="center" component="th" scope="row">{tag.id}</TableCell>
+                <TableCell style={{ width:column_name_width }} align="left">{tag.name}</TableCell>
+                <TableCell style={{ width:column_description_width }} align="left">{tag.description}</TableCell>
                 <TableCell>
                   <IconButton 
                     onClick={() => handleTagDelete(tag.id)}

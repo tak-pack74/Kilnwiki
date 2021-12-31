@@ -32,7 +32,7 @@ export default class APIService{
                   'Content-Type':'application/json'
                 }
             })
-            return response;
+            return response.json();
         } catch (error) {
             return console.log(error);
         }
@@ -46,7 +46,7 @@ export default class APIService{
                   'Content-Type':'application/json'
                 }
             })
-            return response;
+            return response.json();
         } catch (error) {
             return console.log(error);
         }
@@ -111,7 +111,7 @@ export default class APIService{
                   'Content-Type':'application/json'
                 }
             })
-            return response;
+            return response.json();
         } catch (error) {
             return console.log(error);
         }
