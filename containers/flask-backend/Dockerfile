@@ -1,7 +1,6 @@
 FROM python:3
 
 ENV FLASK_APP kilnwiki.py
-ENV FLASK_CONFIG production
 
 RUN adduser --disabled-password kilnwiki 
 USER kilnwiki
