@@ -14,7 +14,7 @@ done
 
 ## アプリケーションの起動。こちらでもリトライしているが、しっかりとした理由はない
 while true; do
-    venv/bin/flask run --host=0.0.0.0
+    venv/bin/gunicorn --bind=0.0.0.0:5000 kilnwiki:app
     result=$?
     if [ $result = "0" ]; then
         break
