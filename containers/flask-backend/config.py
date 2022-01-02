@@ -1,14 +1,6 @@
-"""
-These Configuration classes are used by create_app.(as below)
-
-    app.config.from_object(config[config_name])
-
-※ config_name is defined by host environment variable FLASK_CONFIG.
-e.g. in kubernetes manifest, FLASK_CONFIG should be "kubernetes"
-"""
-
 import os
 
+# 共通設定
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
@@ -25,15 +17,14 @@ class DevelopmentConfig(Config):
     })
     DEBUG = True
 
-
-# NOTE 以下2つの設定用クラスは、現在内容が同じ。将来の拡張性のために分けているが現状では意味はない。
+# NOTE 以下2つの設定用クラスは、現在内容が同じ。将来の拡張性のために分けているが意味はない。
 
 class DockerComposeConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{mysql_host}/{db_name}?charset=utf8'.format(**{
         'user': os.environ.get('MYSQL_USER'),
         'password': os.environ.get('MYSQL_PASSWORD'),
-        'mysql_host': 'mysql-db', # should be equal to service name in docker-compose.yaml
-        'db_name': 'kilnwiki_db', # should be equal to environment variable of mysql container, MYSQL_DATABASE
+        'mysql_host': 'mysql-db', # docker-composeのサービス名
+        'db_name': 'kilnwiki_db', # mysqlコンテナの環境変数 MYSQL_DATABASE と同値である必要あり
     })
     DEBUG = False
 
@@ -41,8 +32,8 @@ class KubernetesConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{mysql_host}/{db_name}?charset=utf8'.format(**{
         'user': os.environ.get('MYSQL_USER'),
         'password': os.environ.get('MYSQL_PASSWORD'),
-        'mysql_host': 'mysql-db', #should be equal to the name of service for mysql in manifest files
-        'db_name': 'kilnwiki_db', # should be equal to environment variable of mysql container, MYSQL_DATABASE
+        'mysql_host': 'mysql-db', # kubernetes マニフェスト mysql用serviceのnameと同値である必要あり
+        'db_name': 'kilnwiki_db', # mysqlコンテナの環境変数 MYSQL_DATABASE と同値である必要あり
     })
     DEBUG = False
 

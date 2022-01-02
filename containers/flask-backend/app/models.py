@@ -1,3 +1,9 @@
+'''
+【内容】
+・SQL Alchemy のモデル定義
+・CRUD操作時のデータシリアライズのためのスキーマ定義
+'''
+
 from datetime import datetime
 
 from sqlalchemy.orm import relationship

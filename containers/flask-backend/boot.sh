@@ -1,7 +1,7 @@
 #!/bin/sh
 . venv/bin/activate
 
-## DBコンテナが完成し、flask migrationが完了する(DBとテーブルができる)までリトライを繰り返す
+## DBコンテナが完成し、flask migrationが完了するまでリトライを繰り返す
 while true; do
     venv/bin/flask deploy
     result=$?
