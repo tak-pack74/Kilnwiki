@@ -5,13 +5,12 @@ import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import APIService from "./APIService";
-
 const PageToolbar = props => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl)
   
   const handleClick = event => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget); // eventの内容は重要ではない。値を入れてtrueにしているだけ
   };
 
   const handleClose = () => {
@@ -80,7 +79,8 @@ const PageToolbar = props => {
       >
         <Grid container justifyContent='flex-end'>
           <Grid item>
-            {!props.isEditorMode && props.chosenPage.id
+            {// 編集画面が非表示または、新規ページの編集時は非表示
+            !props.isEditorMode && props.chosenPage.id
               ? renderPageEditButton()
               : null
             }

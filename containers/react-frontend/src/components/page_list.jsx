@@ -16,13 +16,15 @@ const PageList = props => {
   const handleTagEditorOpen = () => setIsTagEditorOpened(true)
   const handleTagSelectorOpen = () => setIsTagSelectorOpened(true)
 
-  // TODO: ページ一覧の取得処理をAPIService一覧に統合したい
+  /**
+   * 選択されたタグからクエリパラメータを生成、flaskAPI側へリクエスト
+   * 再fetchのタイミング：ページの新規登録・更新・削除時、選択されたタグが変化した時
+   */
   useEffect(() => {
     let params = [];
     for (let i = 0; i < selectedTags.length; i++) {
       params.push(['selected_tag', selectedTags[i]])
     };
-
     const query_param = new URLSearchParams(params);
 
     APIService.fetchPageList(query_param)
