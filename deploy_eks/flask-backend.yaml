@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: flask-backendapi
 spec:
-  replicas: 1
+  replicas: 2
   selector: 
     matchLabels:
       tier: flask-backendapi
@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: flask-backendapi-container
-          image: mice74yamada/kilnwiki-backendapi:v1.1
+          image: mice74yamada/kilnwiki-backendapi
           ports:
           - containerPort: 5000
           env:

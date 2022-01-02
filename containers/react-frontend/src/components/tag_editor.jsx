@@ -11,8 +11,6 @@ import APIService from './APIService'
 
 const TagEditor = props => {
   const [tags, setTags] = useState([]);
-
-  // useEffect起動用のフラグ
   const [isLoading, setIsLoading] = useState(false);
   
   // タグ投稿フォームの入力値を受け取る state
@@ -33,7 +31,6 @@ const TagEditor = props => {
     setIsLoading(true);
   };
 
-  // ページの登録・削除時に再fetch
   useEffect(() => {
     APIService.fetchAllTags()
     .then(response => setTags(response))

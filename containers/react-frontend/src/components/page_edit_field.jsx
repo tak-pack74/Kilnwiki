@@ -10,23 +10,20 @@ import TagSelector from './tag_selector'
 
 
 const PageEditField = props => {
-  // フォームに入力されたページの内容。
-  // ※page_idだけはfetchPageされてきてから更新されることはない
   const [page_id, setPageId] = useState();
   const [page_title, setPageTitle] = useState();
   const [page_body, setPageBody] = useState();
-  
-  // 選択されたタグの id の 配列。命名が悪いが、あくまで id の配列が入る
   const [selected_tags, setSelectedTags] = useState([]);
 
   const [isTagSelectorOpened, setIsTagSelectorOpened] = useState(false);
 
   const handleTagSelectorOpen = () => setIsTagSelectorOpened(true)
 
-  // 選択ページのidからページレコードを取得する。(全カラムのデータを取得)
+  // TODO: pageViewの時点でfetchしてきているので、わざわざ再取得するのは如何か
   useEffect(() => {
     if (props.chosenPage.id) {
       APIService.fetchPage(props.chosenPage.id)
+      .then(response => response.json())
       .then(response => {
         setPageId(response.page.id)
         setPageTitle(response.page.title)
@@ -50,7 +47,7 @@ const PageEditField = props => {
       });
       props.setIsEditorMode(false);
     } else {
-      // idがpropとして渡されていない=新規作成時
+      // 新規作成時
       APIService.insertPage({page_title, page_body, selected_tags})
       .then(response => {
         props.setChosenPage(response.page)
@@ -122,8 +119,8 @@ const PageEditField = props => {
               }}
             >
               {page_id
-                ? 'Update' // 編集時
-                : 'Post'   // 新規投稿時
+                ? 'Update' // 編集
+                : 'Post' // 新規投稿
               }
             </Button>
           </Grid>
