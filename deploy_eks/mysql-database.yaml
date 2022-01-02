@@ -44,7 +44,7 @@ kind: Deployment
 metadata:
   name: mysql-database
 spec:
-  replicas: 2
+  replicas: 1
   selector: 
     matchLabels:
       tier: mysql-database
