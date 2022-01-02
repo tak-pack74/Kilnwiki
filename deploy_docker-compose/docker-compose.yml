@@ -6,6 +6,7 @@ services:
       - "8085:80"
     environment:
       - REACT_APP_CONFIG_NAME=docker-compose
+      - FLASK_HOSTNAME=flask-backendapi
       - NGINX_RESOLVER_NAME=127.0.0.11
     restart: always
   flask-backendapi:
