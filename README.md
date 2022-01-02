@@ -1,10 +1,11 @@
 # kilnwiki
 ReactとFlaskの学習用に作成したゴミです。
 
+![kilnwiki_capture1](https://user-images.githubusercontent.com/47418442/147879785-3758007d-c624-4639-af93-8a04ecbcee1d.png)
+![kilnwiki_capture2](https://user-images.githubusercontent.com/47418442/147879761-c09890bf-e211-4782-9cf9-7e74fda291fc.png)
+
 
 ## できること
-![kilnwiki_capture1](https://user-images.githubusercontent.com/47418442/147879654-7c2b6947-b35a-4d38-8147-d1d9bb3c82f5.png)
-![kilnwiki_capture2](https://user-images.githubusercontent.com/47418442/147879656-8ba1b273-3e0a-459d-80a4-4c862b703723.png)
 
 - Markdownで編集した記事を投稿することができます。
 - 記事にはタグをつけることができ、検索に利用できます。
