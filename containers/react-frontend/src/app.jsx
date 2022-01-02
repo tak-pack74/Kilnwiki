@@ -9,7 +9,6 @@ import PageEditField from './components/page_edit_field';
 import React, { useState }from 'react';
 
 function App() {
-  // ---------- state ----------
   const [chosenPage, setChosenPage] = useState({
     id: null,
     title: null,

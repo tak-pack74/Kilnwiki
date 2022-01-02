@@ -18,7 +18,7 @@ kind: Deployment
 metadata:
   name: frontend-deploy
 spec:
-  replicas: 2
+  replicas: 1
   selector: 
     matchLabels:
       tier: react-frontend
@@ -29,10 +29,12 @@ spec:
     spec:
       containers:
         - name: react-frontend-container
-          image: mice74yamada/kilnwiki-frontend
+          image: mice74yamada/kilnwiki-frontend:v1.1
           ports:
           - containerPort: 80
           env:
+          - name: FLASK_HOSTNAME
+            value: "flask-backendapi.kilnwiki.svc.cluster.local"
           - name: NGINX_RESOLVER_NAME
             value: "kube-dns.kube-system.svc.cluster.local valid=5s"
           resources:
