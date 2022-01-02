@@ -2,6 +2,10 @@ import React from "react";
 import { Toolbar, Typography, IconButton } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 
+/**
+ * menuBar : 画面左上のフィールド
+ * 　全般的な操作に係るコンポーネントを配置する
+ */
 const menuBar = props => {
   return (
     <div>
@@ -19,7 +23,7 @@ const menuBar = props => {
           <IconButton
             sx={{color: '#242424', bgcolor: '#ffffff', border: 1}}
             onClick={() => {
-              props.setChosenPage({})
+              props.setChosenPage({});
               props.setIsEditorMode(true);
             }}
           >
