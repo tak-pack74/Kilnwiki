@@ -19,6 +19,7 @@ export default class APIService{
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                mode: 'cors',
                 body: JSON.stringify(page_data)
             });
             return await response.json();
@@ -38,7 +39,8 @@ export default class APIService{
                 method: 'GET',
                 headers : {
                   'Content-Type':'application/json'
-                }
+                },
+                mode: 'cors',
             })
             return response.json();
         } catch (error) {
@@ -57,8 +59,9 @@ export default class APIService{
             const response = await fetch(`${config.flask_url}/api/fetch_page_list?${query_param}`, {
                 method: 'GET',
                 headers : {
-                  'Content-Type':'application/json'
-                }
+                    'Content-Type':'application/json'
+                  },
+                mode: 'cors',
             })
             return response.json();
         } catch (error) {
@@ -76,9 +79,10 @@ export default class APIService{
         try {
             const response = await fetch(`${config.flask_url}/api/update_page/${id}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers : {
+                    'Content-Type':'application/json'
+                  },
+                mode: 'cors',
                 body: JSON.stringify(page_data)
             });
             return await response.json();
@@ -96,6 +100,7 @@ export default class APIService{
         try {
             const response = await fetch(`${config.flask_url}/api/delete_page/${id}`, {
                 method: 'DELETE',
+                mode: 'cors',
             });
             return await response.json();
         } catch (error) {
@@ -115,6 +120,7 @@ export default class APIService{
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                mode: 'cors',
                 body: JSON.stringify(tag_data)
             });
             return await response.json();
@@ -132,6 +138,7 @@ export default class APIService{
         try {
             const response = await fetch(`${config.flask_url}/api/delete_tag/${id}`, {
                 method: 'DELETE',
+                mode: 'cors',
             });
             return await response.json();
         } catch (error) {
@@ -150,7 +157,8 @@ export default class APIService{
                 method: 'GET',
                 headers : {
                   'Content-Type':'application/json'
-                }
+                },
+                mode: 'cors',
             })
             return response.json();
         } catch (error) {
