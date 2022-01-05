@@ -1,7 +1,7 @@
 version: '3'
 services:
   react-frontend:
-    image: mice74yamada/kilnwiki-frontend
+    image: mice74yamada/kilnwiki-frontend:v1.1
     ports:
       - "8085:80"
     environment:
@@ -10,7 +10,7 @@ services:
       - NGINX_RESOLVER_NAME=127.0.0.11
     restart: always
   flask-backendapi:
-    image: mice74yamada/kilnwiki-backendapi
+    image: mice74yamada/kilnwiki-backendapi:v1.1
     environment:
       - FLASK_CONFIG=docker-compose
     env_file: .env
