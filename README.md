@@ -15,7 +15,6 @@ ReactとFlaskの学習用に作成したゴミです。
 
 - 画像アップロードができません
 - ユーザ認証機能もありません。
-- ゴミです
 
 ## Overview
 ![image](https://user-images.githubusercontent.com/47418442/147878995-a4f51c8f-8b43-45a1-b963-36687502992f.png)
