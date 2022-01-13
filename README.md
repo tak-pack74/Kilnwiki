@@ -36,7 +36,7 @@ vi .env_sample
 mv .env_sample .env
 
 # 作成
-docker-compose u
+docker-compose up
 ```
 
 ### EKS上で
