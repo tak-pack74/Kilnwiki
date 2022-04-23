@@ -42,7 +42,7 @@ docker-compose up
 ### EKS上で
 ```
 kubectl create namespace kilnwiki
-kubectl create secret generic -n kilnwiki --from-literal=mysql_user_name=<YOUR_MYSQL_USERNAME> --from-literal=mysql_password=<YOUR_MYSQL_PASSWORD>
+kubectl create secret generic -n kilnwiki --from-literal=mysql_user_name=<YOUR_MYSQL_USERNAME> --from-literal=mysql_password=<YOUR_MYSQL_PASSWORD> mysql-auth
 kubectl apply --kustomize=https://raw.githubusercontent.com/yamada-tak07/kilnwiki/v1.1/deploy_eks/kustomization.yaml
 ```
 
