@@ -1,5 +1,6 @@
+---
 namespace: kilnwiki
 resources: 
-- https://raw.githubusercontent.com/yamada-tak07/kilnwiki/v1.1/deploy_eks/mysql-database.yaml
-- https://raw.githubusercontent.com/yamada-tak07/kilnwiki/v1.1/deploy_eks/flask-backend.yaml
-- https://raw.githubusercontent.com/yamada-tak07/kilnwiki/v1.1/deploy_eks/react-frontend.yaml
+- mysql-database.yaml
+- flask-backend.yaml
+- react-frontend.yaml
